@@ -1,305 +1,84 @@
 'use strict';
 
 var timeSlots = ['6am:', '7am:', '8am:', '9am:', '10am:', '11am:', '12pm:', '1pm:', '2pm:', '3pm:', '4pm:', '5pm:', '6pm:', '7pm:', '8pm:'];
+var totalcustomers = 0;
+var totalcookies = 0;
+var tableId = document.getElementById('tableId');
+var trEl = document.createElement('tr');
 
-var pikeStreet = {
+var storeHolder = [];
 
-  minCustumer: 22,
-  maxCustumer: 44,
-  minCookie: 22,
-  maxCookie: 70,
+function CookieStores(name, minCustomer, maxCustomer, minCookie, maxCookie,) {
+  this.name = name;
+  this.minCustomer = minCustomer;
+  this.maxCustomer = maxCustomer;
+  this.minCookie = minCookie;
+  this.maxCookie = maxCookie;
+
+ }
+
+ CookieStores.prototype.render = function() {
+   var trEl = document.createElement('tr');
+   for (var i = 0; i < timeSlots.length; i++) { 
+    
+    var customers =  Math.random() * (this.maxCustomer - this.minCustomer) + this.minCustomer;
+    customers = Math.floor(customers);
+    totalcustomers += customers;
   
-  customersPerHour: [],
-
-  cookiesSoldPerHour: [],
-
-  totalcustomersAllDay: 0 ,
-
-  totalcookiesAllDay: 0,
-
-  render: function() {
     
-    var ulEl = document.getElementById('pike');
+    var cookiesSold = Math.random() * (this.maxCookie - this.minCookie) + this.minCookie;
+    cookiesSold = Math.floor(cookiesSold);
+    totalcookies += cookiesSold;
     
-    for (var i = 0; i < timeSlots.length; i++) {
-      var customers =  Math.random() * (this.maxCustumer - this.minCustumer) + this.minCustumer;
-      customers = Math.floor(customers);
-      this.customersPerHour.push(customers);
-      //stores total customers the day.
-      this.totalcustomersAllDay += customers;
-      
-      var cookiesSold = Math.random() * (this.maxCookie - this.minCookie) + this.minCookie;
-      cookiesSold = Math.floor(cookiesSold);
-      this.cookiesSoldPerHour.push(cookiesSold);
-      //Calculates total cookies sold that day.
-      this.totalcookiesAllDay += cookiesSold;
-      
-      var liEl = document.createElement('li');
-      liEl.textContent  = timeSlots[i] + " " + this.cookiesSoldPerHour + ' cookies sold and ' + this.customersPerHour + ' customers visted the store.';
-      ulEl.appendChild(liEl);
 
-      this.cookiesSoldPerHour = [];
-      this.customersPerHour = [];
-    }
-    //Divide total cookies sold by 14 hours to get average cookies sold per hour.
-    var averageCookiesPerHour = Math.floor(this.totalcookiesAllDay / 14);
-    console.log(averageCookiesPerHour);
-      //this.totalcookiesAllDay / 14hours = avg cookies sold per hour
-     // Attempting to present totals data in 'p' element.
-    var divEl = document.getElementById('totals1');
-     
-    var pEl = document.createElement('p');
-    pEl.textContent = 'Today a total of ' + this.totalcookiesAllDay + ' cookies were sold at the Pike store.';
-    divEl.appendChild(pEl);
+    var tdEl = document.createElement('td');
+    tdEl.textContent = this.name + customers + ' customers & ' + cookiesSold + ' cookies sold';
+  
+    trEl.appendChild(tdEl);
+    tableId.appendChild(trEl);
+   }
+   var tdEl = document.createElement('td');
+   tdEl.textContent = totalcustomers + ' total customers today and ' + totalcookies + ' cookies sold';
+   trEl.appendChild(tdEl);
+   tableId.appendChild(trEl);
+ }
 
-    var pEl2 = document.createElement('p');
-    pEl2.textContent = 'Today a total of ' + this.totalcustomersAllDay + ' customers visted the Pike store';
-    divEl.appendChild(pEl2);
+ function makeHeaderRow() {
+  var trEl = document.createElement('tr');
+   for(var i=0; i < timeSlots.length; i++) {
+     var thEl = document.createElement('th');
+     thEl.textContent = timeSlots[i];
+     trEl.appendChild(thEl);
+     tableId.appendChild(trEl);
+   } 
+   var thEl = document.createElement('th');
+   thEl.textContent = 'Totals';
+   trEl.appendChild(thEl);
+ }
+ var pike = new CookieStores('Pike Store: ',22,44,22,70);
+ var seatac = new CookieStores('Seatac Store: ', 15, 33, 30, 40);
+ var seattleCenter = new CookieStores('Seattle Center: ', 25, 75, 25, 105);
+ var capitalHill = new CookieStores('Capitol Hill: ', 20, 55, 20, 40);
+ var alki = new CookieStores('Alki: ', 40, 65, 40, 75);
 
-    var pEl3 = document.createElement('p');
-    pEl3.textContent = ' Also an average of ' + averageCookiesPerHour + ' cookies were sold per hour.'
-    divEl.appendChild(pEl3);
-  }
-}
-
-var seatac = {
-
-  minCustumer: 11,
-  maxCustumer: 22,
-  minCookie: 11,
-  maxCookie: 55,
-
-  customersPerHour: [],
-
-  cookiesSoldPerHour: [],
-
-  totalcustomersAllDay: 0 ,
-
-  totalcookiesAllDay: 0,
-
-  render: function() {
-    
-    var ulEl = document.getElementById('seatac');
-    
-    for (var i = 0; i < timeSlots.length; i++) {
-      var customers =  Math.random() * (this.maxCustumer - this.minCustumer) + this.minCustumer;
-      customers = Math.floor(customers);
-      this.customersPerHour.push(customers);
-      //Calculates total customers that day.
-      this.totalcustomersAllDay += customers;
-      
-      var cookiesSold = Math.random() * (this.maxCookie - this.minCookie) + this.minCookie;
-      cookiesSold = Math.floor(cookiesSold);
-      this.cookiesSoldPerHour.push(cookiesSold);
-      //Calculates total cookies sold that day.
-      this.totalcookiesAllDay += cookiesSold;
-      
-
-      var liEl = document.createElement('li');
-      liEl.textContent  = timeSlots[i] + " " + this.cookiesSoldPerHour + ' cookies sold and ' + this.customersPerHour + ' customers visted the store';
-      ulEl.appendChild(liEl);
-
-      this.cookiesSoldPerHour = [];
-      this.customersPerHour = [];
-    }
-    //Divide total cookies sold by 14 hours to get average cookies sold per hour.
-    var averageCookiesPerHour = Math.floor(this.totalcookiesAllDay / 14);
-    console.log(averageCookiesPerHour);
-    // Attempting to present totals data in 'p' element.
-    var divEl = document.getElementById('totals2');
-    var pEl = document.createElement('p');
-    pEl.textContent = 'Today a total of ' + this.totalcookiesAllDay + ' cookies were sold at the Seatac store. ';
-    divEl.appendChild(pEl);
-
-    var pEl2 = document.createElement('p');
-    pEl2.textContent = 'Today a total of ' + this.totalcustomersAllDay + ' customers visted the Seatac store';
-    divEl.appendChild(pEl2);
-
-    var pEl3 = document.createElement('p');
-    pEl3.textContent = ' Also an average of ' + averageCookiesPerHour + ' cookies were sold per hour.'
-    divEl.appendChild(pEl3);
-  }
-}
-
-var seattleCenter = {
-
-  minCustumer: 33,
-  maxCustumer: 66,
-  minCookie: 33,
-  maxCookie: 55,
-
-  customersPerHour: [],
-
-  cookiesSoldPerHour: [],
-
-  totalcustomersAllDay: 0,
-
-  totalcookiesAllDay: 0,
-
-  render: function() {
-    
-    var ulEl = document.getElementById('seattle-center');
-    
-    for (var i = 0; i < timeSlots.length; i++) {
-      var customers =  Math.random() * (this.maxCustumer - this.minCustumer) + this.minCustumer;
-      customers = Math.floor(customers);
-      this.customersPerHour.push(customers);
-      //Calculates total customers that day.
-      this.totalcustomersAllDay += customers;
-      
-      var cookiesSold = Math.random() * (this.maxCookie - this.minCookie) + this.minCookie;
-      cookiesSold = Math.floor(cookiesSold);
-      this.cookiesSoldPerHour.push(cookiesSold);
-      //Calculates total cookies sold that day.
-      this.totalcookiesAllDay += cookiesSold;
-      
-
-      var liEl = document.createElement('li');
-      liEl.textContent  = timeSlots[i] + " " +  this.cookiesSoldPerHour + ' cookies sold and ' + this.customersPerHour + ' customers visted the store';
-      ulEl.appendChild(liEl);
-
-      this.cookiesSoldPerHour = [];
-      this.customersPerHour = [];
-    }
-    //Divide total cookies sold by 14 hours to get average cookies sold per hour.
-    var averageCookiesPerHour = Math.floor(this.totalcookiesAllDay / 14);
-    console.log(averageCookiesPerHour);
-    // Attempting to present totals data in 'p' element.
-    var divEl = document.getElementById('totals3');
-    var pEl = document.createElement('p');
-    pEl.textContent = 'Today a total of ' + this.totalcookiesAllDay + ' cookies were sold at the Seattle Center store.';
-    divEl.appendChild(pEl);
-
-    var pEl2 = document.createElement('p');
-    pEl2.textContent = 'Today a total of ' + this.totalcustomersAllDay + ' customers visted the Seattle Center store';
-    divEl.appendChild(pEl2);
-
-    var pEl3 = document.createElement('p');
-    pEl3.textContent = ' Also an average of ' + averageCookiesPerHour + ' cookies were sold per hour.'
-    divEl.appendChild(pEl3);
-  }
-}
-
-var capitalHill = {
-
-  minCustumer: 23,
-  maxCustumer: 46,
-  minCookie: 23,
-  maxCookie: 55,
-
-  customersPerHour: [],
-
-  cookiesSoldPerHour: [],
-
-  totalcustomersAllDay: 0 ,
-
-  totalcookiesAllDay: 0,
-
-  render: function() {
-    
-    var ulEl = document.getElementById('capitol-hill');
-    
-    for (var i = 0; i < timeSlots.length; i++) {
-      var customers =  Math.random() * (this.maxCustumer - this.minCustumer) + this.minCustumer;
-      customers = Math.floor(customers);
-      this.customersPerHour.push(customers);
-      //Calculates total customers that day.
-      this.totalcustomersAllDay += customers;
-      
-      var cookiesSold = Math.random() * (this.maxCookie - this.minCookie) + this.minCookie;
-      cookiesSold = Math.floor(cookiesSold);
-      this.cookiesSoldPerHour.push(cookiesSold);
-      //Calculates total cookies sold that day.
-      this.totalcookiesAllDay += cookiesSold;
-      
-
-      var liEl = document.createElement('li');
-      liEl.textContent  = timeSlots[i] + " "  + this.cookiesSoldPerHour + ' cookies sold and ' + this.customersPerHour + ' customers visted the store';
-      ulEl.appendChild(liEl);
-
-      this.cookiesSoldPerHour = [];
-      this.customersPerHour = [];
-    }
-    //Divide total cookies sold by 14 hours to get average cookies sold per hour.
-    var averageCookiesPerHour = Math.floor(this.totalcookiesAllDay / 14);
-    console.log(averageCookiesPerHour);
-    
-    // Attempting to present totals data in 'p' element.
-    var divEl = document.getElementById('totals4');
-    var pEl = document.createElement('p');
-    pEl.textContent = 'Today a total of ' + this.totalcookiesAllDay + ' were sold';
-    divEl.appendChild(pEl);
-
-    var pEl2 = document.createElement('p');
-    pEl2.textContent = 'Today a total of ' + this.totalcustomersAllDay + ' visted the store';
-    divEl.appendChild(pEl2);
-
-    var pEl3 = document.createElement('p');
-    pEl3.textContent = ' Also an average of ' + averageCookiesPerHour + ' cookies were sold per hour.'
-    divEl.appendChild(pEl3);
-  }
-}
-
-var alki = {
-
-  minCustumer: 23,
-  maxCustumer: 46,
-  minCookie: 23,
-  maxCookie: 55,
-
-  customersPerHour: [],
-
-  cookiesSoldPerHour: [],
-
-  totalcustomersAllDay: 0 ,
-
-  totalcookiesAllDay: 0,
-
-  render: function() {
-    
-    var ulEl = document.getElementById('alki');
-    
-    for (var i = 0; i < timeSlots.length; i++) {
-      var customers =  Math.random() * (this.maxCustumer - this.minCustumer) + this.minCustumer;
-      customers = Math.floor(customers);
-      this.customersPerHour.push(customers);
-      //Calculates total customers that day.
-      this.totalcustomersAllDay += customers;
-      
-      var cookiesSold = Math.random() * (this.maxCookie - this.minCookie) + this.minCookie;
-      cookiesSold = Math.floor(cookiesSold);
-      this.cookiesSoldPerHour.push(cookiesSold);
-      //Calculates total cookies sold that day.
-      this.totalcookiesAllDay += cookiesSold;
-      
-
-      var liEl = document.createElement('li');
-      liEl.textContent  = timeSlots[i] + " " + this.cookiesSoldPerHour + ' cookies sold and ' + this.customersPerHour + ' customers visted the store';
-      ulEl.appendChild(liEl);
-
-      this.cookiesSoldPerHour = [];
-      this.customersPerHour = [];
-    }
-    //Divide total cookies sold by 14 hours to get average cookies sold per hour.
-    var averageCookiesPerHour = Math.floor(this.totalcookiesAllDay / 14);
-    console.log(averageCookiesPerHour);
-    // Attempting to present totals data in 'p' element.
-    var divEl = document.getElementById('totals5');
-    var pEl = document.createElement('p');
-    pEl.textContent = 'Today a total of ' + this.totalcookiesAllDay + ' were sold';
-    divEl.appendChild(pEl);
-
-    var pEl2 = document.createElement('p');
-    pEl2.textContent = 'Today a total of ' + this.totalcustomersAllDay + ' visted the store';
-    divEl.appendChild(pEl2);
-
-    var pEl3 = document.createElement('p');
-    pEl3.textContent = ' Also an average of ' + averageCookiesPerHour + ' cookies were sold per hour.'
-    divEl.appendChild(pEl3);
-  }
-}
-pikeStreet.render();
+makeHeaderRow();
+pike.render();
 seatac.render();
 seattleCenter.render();
 capitalHill.render();
 alki.render();
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
