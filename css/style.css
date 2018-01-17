@@ -1,0 +1,33 @@
+body {
+  background: rgb(48, 7, 230);
+  
+}
+a {
+  color: white;  
+}
+h1, h2 {
+  color: white;
+  text-align: center;
+  font-family: 'Abel', sans-serif;
+  font-size: 40px;
+}
+
+table {
+	border: 10px solid rgb(226, 228, 138);
+  
+}
+
+td {
+	padding: 10px;
+	border-radius: 30px;
+  border: 4px groove rgb(223, 15, 15);
+  background: white;
+  font-family: 'Roboto Mono', monospace;
+  font-size: 12spx;
+}
+
+th {
+	background-color: white;
+  color: #76323F;
+
+}
