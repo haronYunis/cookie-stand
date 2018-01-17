@@ -1,0 +1,35 @@
+body{
+  background: rgb(48, 7, 230);
+
+}
+
+h1 {
+ font-family: 'Abel', sans-serif;
+ font-size: 50px;
+ color: aliceblue;
+}
+
+h3 {
+  border: 10px solid red;
+  border-color: red;
+  color: rgb(233, 236, 4);
+}
+
+li {
+  font-family: 'Abel', 'sans-serif';
+  font-size: 30px;
+  color: white;
+  padding: 10px;
+  margin: 5px 30px;
+}
+
+p{
+  font-family: 'Abel', 'sans-serif';
+  font-size: 30px;
+  color: white;
+}
+
+b {
+  font-family: 'Abel', 'sans-serif';
+  font-size: 50px;
+}
