@@ -32,13 +32,13 @@ function CookieStores(name, minCustomer, maxCustomer, minCookie, maxCookie,) {
     
 
     var tdEl = document.createElement('td');
-    tdEl.textContent = this.name + customers + ' customers & ' + cookiesSold + ' cookies sold';
+    tdEl.textContent = this.name + customers + ' customers & ' + cookiesSold + ' cookies sold.';
   
     trEl.appendChild(tdEl);
     tableId.appendChild(trEl);
    }
    var tdEl = document.createElement('td');
-   tdEl.textContent = totalcustomers + ' total customers today and ' + totalcookies + ' cookies sold';
+   tdEl.textContent = totalcustomers + ' total customers today and ' + totalcookies + ' cookies sold.';
    trEl.appendChild(tdEl);
    tableId.appendChild(trEl);
  }
