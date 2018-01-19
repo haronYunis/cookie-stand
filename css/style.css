@@ -13,8 +13,8 @@ h1, h2 {
 }
 
 table {
-	border: 10px solid rgb(226, 228, 138);
-  
+  border: 10px solid rgb(226, 228, 138);
+  width: 100%;
 }
 
 td {
@@ -30,4 +30,9 @@ th {
 	background-color: white;
   color: #76323F;
 
+}
+
+legend {
+  color: white;
+  font-size: 20px;
 }
