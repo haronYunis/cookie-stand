@@ -42,7 +42,7 @@ CookieStores.prototype.render = function () {
 
     trEl.appendChild(tdEl);
     tableId.appendChild(trEl);
-  }
+}
   var tdEl = document.createElement('td');
   tdEl.textContent = totalcustomers + ' total customers today and ' + totalcookies + ' cookies sold.';
   trEl.appendChild(tdEl);
@@ -98,7 +98,7 @@ function newStore(e) {
   var maxCookie = e.target.maxCookie.value;
   var avgCookie = e.target.avgCookie.value;
   
-  new CookieStores(newName,minCustomer,maxCustomer, minCookie, maxCookie);
+  new CookieStores(newName,minCustomer,maxCustomer, minCookie, maxCookie, avgCookie);
 
   tableId.innerHTML = '';
   makeHeaderRow();
