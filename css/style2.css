@@ -1,0 +1,43 @@
+body{
+  background-color: blue;
+}
+
+h1{
+  color: white;
+  display: inline;
+  font-size: 45px;
+  margin-left: 35%;
+}
+
+h3{
+  color: white;
+  font-size: 30px;
+  margin-left: 36%;
+}
+
+nav h3 {
+  margin-left: 40%;
+}
+nav ul li  {
+  display: inline;
+  color: white;
+  font-size: 30px;
+  margin: 30px;
+  margin-left: 55px;
+}
+
+p{
+  color: white;
+  font-size: 20px;
+  display: inline-block;
+  margin: 30px 60px 20px 30px;
+  padding: 0px 100px 0px 100px;
+}
+
+footer img{
+  width: 25%;
+  height: 15em;
+  display: inline-block;
+  margin: 30px; 
+}
+

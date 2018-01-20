@@ -45,3 +45,10 @@ input {
 label{
   color: white;
 }
+
+footer img{
+  width: 20%;
+  display: inline-block;
+  background-color: red;
+  
+}
